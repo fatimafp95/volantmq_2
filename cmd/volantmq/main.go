@@ -793,7 +793,7 @@ func main() {
 	})
 
 	logger.Info("MQTT server created")
-
+	logger.Info("1...2...3...")
 	logger.Info("MQTT starting listeners")
 	for _, l := range listeners["mqtt"] {
 		if err = ctx.srv.ListenAndServe(l); err != nil {

@@ -22,13 +22,13 @@ ENV PATH $VOLANTMQ_WORK_DIR/bin:$PATH
 RUN apk update && apk upgrade && \
     apk add --no-cache bash git openssh gcc g++
 
-COPY . $GOPATH/src/github.com/VolantMQ/volantmq
+COPY . $GOPATH/src/github.com/fatimafp95/volantmq_2
 
-RUN cp $GOPATH/src/github.com/VolantMQ/volantmq/tools/print_version.sh /bin
+RUN cp $GOPATH/src/github.com/fatimafp95/volantmq_2/tools/print_version.sh /bin
 
 # build server
 RUN \
-       cd $GOPATH/src/github.com/VolantMQ/volantmq/cmd/volantmq \
+       cd $GOPATH/src/github.com/fatimafp95/volantmq_2/cmd/volantmq \
     && GO111MODULE=off go get github.com/troian/govvv \
     && govvv build $VOLANTMQ_BUILD_FLAGS -o $VOLANTMQ_WORK_DIR/bin/volantmq
 
