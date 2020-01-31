@@ -23,13 +23,13 @@ ENV PATH $VOLANTMQ_WORK_DIR/bin:$PATH
 
 # build server
 RUN \
-       GO111MODULE=off go get -v github.com/VolantMQ/volantmq/cmd/volantmq \
-    && cd $GOPATH/src/github.com/VolantMQ/volantmq/cmd/volantmq \
+       GO111MODULE=off go get -v github.com/fatimafp95/volantmq_2/cmd/volantmq \
+    && cd $GOPATH/src/github.com/fatimafp95/volantmq_2/cmd/volantmq \
     && GO111MODULE=on go mod tidy \
     && go get github.com/troian/govvv \
     && govvv build $VOLANTMQ_BUILD_FLAGS -o $VOLANTMQ_WORK_DIR/bin/volantmq
 
-RUN cp $GOPATH/src/github.com/VolantMQ/volantmq/tools/print_version.sh /bin
+RUN cp $GOPATH/src/github.com/fatimafp95/volantmq_2/tools/print_version.sh /bin
 
 # build debug plugins
 RUN \
@@ -48,13 +48,13 @@ RUN \
 # build metrics plugins
 RUN \
        GO111MODULE=off go get gitlab.com/VolantMQ/vlplugin/monitoring/prometheus \
-    && cd $GOPATH/src/gitlab.com/VolantMQ/monitoring/prometheus \
+    && cd $GOPATH/src/gitlab.com/VolantMQ/vlplugin/monitoring/prometheus \
     && GO111MODULE=on go mod tidy \
     && go build $VOLANTMQ_BUILD_FLAGS -buildmode=plugin -ldflags "-X main.version=$(print_version.sh)" -o $VOLANTMQ_WORK_DIR/plugins/prometheus.so
 
 RUN \
        GO111MODULE=off go get gitlab.com/VolantMQ/vlplugin/monitoring/systree \
-    && cd $GOPATH/src/gitlab.com/VolantMQ/monitoring/systree \
+    && cd $GOPATH/src/gitlab.com/VolantMQ/vlplugin/monitoring/systree \
     && GO111MODULE=on go mod tidy \
     && go build $VOLANTMQ_BUILD_FLAGS -buildmode=plugin -ldflags "-X main.version=$(print_version.sh)" -o $VOLANTMQ_WORK_DIR/plugins/systree.so
 
