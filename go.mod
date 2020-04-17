@@ -1,6 +1,9 @@
 module github.com/VolantMQ/volantmq
 
+//module github.com/lucas-clemente/quic-go
+
 go 1.13
+replace github.com/lucas-clemente/quic-go v0.15.1 => /home/pgarrido/go/src/github.com/lucas-clemente2/quic-go
 
 require (
 	github.com/VolantMQ/vlapi v0.5.4
@@ -8,6 +11,7 @@ require (
 	github.com/gobwas/pool v0.2.0 // indirect
 	github.com/gobwas/ws v1.0.2
 	github.com/lucas-clemente/quic-go v0.15.1
+	//github.com/lucas-clemente/quic-go v0.0.0
 	github.com/pkg/errors v0.8.1
 	github.com/stretchr/testify v1.4.0
 	github.com/troian/healthcheck v0.1.3
@@ -16,3 +20,5 @@ require (
 	go.uber.org/zap v1.12.0
 	gopkg.in/yaml.v3 v3.0.0-20200121175148-a6ecf24a6d71
 )
+
+
