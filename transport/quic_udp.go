@@ -20,7 +20,11 @@ type ConfigQUIC struct {
 type quic_udp struct {
 	baseConfig 
 	tls		*tls.Config
+<<<<<<< HEAD
 	listener	quic.Listener 
+=======
+	listener	quic.EarlyListener //Listener para UDP
+>>>>>>> c1110d28548d3cbacecc4eb6b92ecda53924dc35
 }
 // NewConfigQUIC crea nueva configuración para QUIC
 func NewConfigQuic(transport *Config) *ConfigQUIC {
@@ -28,6 +32,27 @@ func NewConfigQuic(transport *Config) *ConfigQUIC {
 		Scheme:    "udp",
 		transport: transport,
 	}
+}
+
+type Token struct {
+	// IsRetryToken encodes how the client received the token. There are two ways:
+	// * In a Retry packet sent when trying to establish a new connection.
+	// * In a NEW_TOKEN frame on a previous connection.
+	IsRetryToken bool
+	RemoteAddr   string
+	SentTime     time.Time
+}
+
+func AcceptToken (clientAddr net.Addr,  Token *quic.Token ) bool{
+	if clientAddr == nil{
+		return true
+	}
+
+
+	if Token == nil {
+		return true
+	}
+	return true
 }
 
 //InternalConfig: configuración interna del servidor
@@ -43,7 +68,11 @@ func NewQUIC(config *ConfigQUIC, internal *InternalConfig) (Provider, error){
 
 	//llamada al socket de quic
 	
-	if l.listener, err = quic.ListenAddr(config.transport.Host+":"+config.transport.Port, config.TLS, nil); err != nil{
+	//if l.listener, err = quic.ListenAddr(config.transport.Host+":"+config.transport.Port, config.TLS, nil); err != nil{
+	quicConfig := &quic.Config{
+		AcceptToken: AcceptToken,
+	}
+	if l.listener, err = quic.ListenAddrEarly(config.transport.Host+":"+config.transport.Port, config.TLS, quicConfig); err != nil{
 		return nil ,err
 	}
 
