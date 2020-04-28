@@ -85,7 +85,7 @@ mqtt:
     maxTopicAlias: 65535     # don't set to use default
     maxQoS: 2
 listeners:
-  defaultAddr: "127.0.0.1"
+  defaultAddr: 127.0.0.1
   mqtt:
     quic: 
       1883:

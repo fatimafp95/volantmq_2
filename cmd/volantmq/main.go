@@ -107,7 +107,7 @@ func init() {
 	}
 }
 
-//FFP: Setup a bare-bones TLS config for the QUIC server
+//Setup a bare-bones TLS config for the QUIC server
 func generateTLSConfig() *tls.Config {
 	key, err := rsa.GenerateKey(rand.Reader, 1024)
 	if err != nil {
@@ -175,7 +175,7 @@ func loadMqttListeners(defaultAuth *auth.Manager, lCfg *configuration.ListenersC
 				listeners = append(listeners, tcpConfig)*/
 			//QUIC:
 			case "quic":
-				quicConfig := transport.NewConfigQuic(tCfg) //Se pasan los parámetros de host, port y auth
+				quicConfig := transport.NewConfigQuic(tCfg)
 				if name == "quic"{
 					tlsConfig := generateTLSConfig()
 					fmt.Println("TLS config")

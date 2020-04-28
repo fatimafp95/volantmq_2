@@ -1,9 +1,6 @@
 package transport
 
 import (
-//	"errors"
-//	"net"
-//	"os"
 	"github.com/lucas-clemente/quic-go"
 	"github.com/VolantMQ/volantmq/auth"
 	"github.com/VolantMQ/volantmq/metrics"
@@ -29,7 +26,6 @@ type sess struct {
 	Sess quic.Stream
 	stat metrics.Bytes
 }
-//var _ Sess = (*sess)(nil)
 
 // Handler ...
 type Handler interface {
@@ -73,14 +69,3 @@ func (c *sess) Write(b []byte) (int, error){
 
 	return n, err
 }
-/*
-// File ...
-func (c *conn) File() (*os.File, error) {
-	switch t := c.Conn.(type) {
-	case *net.TCPConn:
-		return t.File()
-	}
-
-	return nil, errors.New("not implemented")
-}
-*/

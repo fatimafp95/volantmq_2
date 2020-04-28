@@ -7,24 +7,20 @@ import (
 "net"
 "time"
 
-//"github.com/VolantMQ/volantmq/metrics"
 "github.com/VolantMQ/volantmq/types"
-
-//"github.com/VolantMQ/volantmq/configuration"
-
 "github.com/lucas-clemente/quic-go"
 )
 
 type ConfigQUIC struct {
 	Scheme		string
 	TLS			*tls.Config
-	transport	*Config //addr y puerto
+	transport	*Config
 }
 
 type quic_udp struct {
-	baseConfig //Configuración base
+	baseConfig 
 	tls		*tls.Config
-	listener	quic.Listener //Listener para UDP
+	listener	quic.Listener 
 }
 // NewConfigQUIC crea nueva configuración para QUIC
 func NewConfigQuic(transport *Config) *ConfigQUIC {

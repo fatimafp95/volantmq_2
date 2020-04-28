@@ -17,7 +17,6 @@ import (
 type Config struct {
 	// AuthManager
 	AuthManager *auth.Manager
-
 	Host string
 	// Port tcp port to listen on
 	Port string
