@@ -2,16 +2,16 @@ package main
 
 import (
 	"context"
-	"crypto/rand"
-	"crypto/rsa"
+	//"crypto/rand"
+	//"crypto/rsa"
 	"crypto/sha256"
 	"crypto/tls"
-	"crypto/x509"
-	"encoding/pem"
+	//"crypto/x509"
+	//"encoding/pem"
 	"errors"
 	"fmt"
 	"io/ioutil"
-	"math/big"
+	//"math/big"
 	"net/http"
 	"os"
 	"os/signal"
@@ -107,28 +107,22 @@ func init() {
 	}
 }
 
-//Setup a bare-bones TLS config for the QUIC server
+//FFP: Setup a bare-bones TLS config for the QUIC server
 func generateTLSConfig() *tls.Config {
-	key, err := rsa.GenerateKey(rand.Reader, 1024)
-	if err != nil {
-		panic(err)
-	}
-	template := x509.Certificate{SerialNumber: big.NewInt(1)}
-	certDER, err := x509.CreateCertificate(rand.Reader, &template, &template, &key.PublicKey, key)
-	if err != nil {
-		panic(err)
-	}
-	keyPEM := pem.EncodeToMemory(&pem.Block{Type: "RSA PRIVATE KEY", Bytes: x509.MarshalPKCS1PrivateKey(key)})
-	certPEM := pem.EncodeToMemory(&pem.Block{Type: "CERTIFICATE", Bytes: certDER})
+	privKeyFile := "cert.key"
+	certFile := "cert.crt"
+
+	keyPEM,_ := ioutil.ReadFile(privKeyFile)
+	certPEM,_ := ioutil.ReadFile(certFile)
 
 	tlsCert, err := tls.X509KeyPair(certPEM, keyPEM)
-	if err != nil{
+	if err != nil {
 		panic(err)
 	}
 
 	return &tls.Config{
 		Certificates: []tls.Certificate{tlsCert},
-		NextProtos: []string{"quic-echo-example"},
+		NextProtos:   []string{"quic-echo-example"},
 	}
 }
 ///
@@ -175,7 +169,7 @@ func loadMqttListeners(defaultAuth *auth.Manager, lCfg *configuration.ListenersC
 				listeners = append(listeners, tcpConfig)*/
 			//QUIC:
 			case "quic":
-				quicConfig := transport.NewConfigQuic(tCfg)
+				quicConfig := transport.NewConfigQuic(tCfg) //Se pasan los parámetros de host, port y auth
 				if name == "quic"{
 					tlsConfig := generateTLSConfig()
 					fmt.Println("TLS config")
@@ -837,6 +831,7 @@ func main() {
 	logger.Info("MQTT server created")
 	logger.Info("1...2...3...")
 	logger.Info("MQTT starting listeners")
+	logger.Info("0-RTT ON")
 	for _, l := range listeners["mqtt"] {
 		if err = ctx.srv.ListenAndServe(l); err != nil {
 			logger.Fatal("listen and serve", zap.Error(err))
@@ -853,7 +848,7 @@ func main() {
 	signal.Notify(ch, syscall.SIGINT, syscall.SIGTERM)
 	sig := <-ch
 	logger.Info("service received signal: ", sig.String())
-
+	
 	if err = ctx.srv.Shutdown(); err != nil {
 		logger.Error("shutdown server", zap.Error(err))
 	}

@@ -3,16 +3,12 @@ module github.com/VolantMQ/volantmq
 //module github.com/lucas-clemente/quic-go
 
 go 1.13
-<<<<<<< HEAD
 replace github.com/lucas-clemente/quic-go v0.15.1 => /home/administrator/go/src/github.com/lucas-clemente2/quic-go
-=======
-replace github.com/lucas-clemente/quic-go v0.15.1 => /home/pgarrido/go/src/github.com/lucas-clemente2/quic-go
->>>>>>> c1110d28548d3cbacecc4eb6b92ecda53924dc35
 
 require (
 	github.com/VolantMQ/vlapi v0.5.4
-	github.com/blang/semver v3.5.1+incompatible // indirect
-	github.com/coreos/bbolt v1.3.3 // indirect
+//	github.com/blang/semver v3.5.1+incompatible // indirect
+//	github.com/coreos/bbolt v1.3.3 // indirect
 	github.com/gobwas/httphead v0.0.0-20180130184737-2c6c146eadee // indirect
 	github.com/gobwas/pool v0.2.0 // indirect
 	github.com/gobwas/ws v1.0.2
@@ -24,7 +20,7 @@ require (
 	github.com/troian/healthcheck v0.1.3
 	github.com/vbauerster/mpb/v4 v4.9.4
 	gitlab.com/VolantMQ/vlplugin/persistence/mem v0.0.4
-	go.etcd.io/bbolt v1.3.3 // indirect
+//	go.etcd.io/bbolt v1.3.3 // indirect
 	go.uber.org/zap v1.12.0
 	gopkg.in/yaml.v3 v3.0.0-20200121175148-a6ecf24a6d71
 )
