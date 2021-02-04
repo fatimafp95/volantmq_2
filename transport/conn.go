@@ -8,17 +8,7 @@ import (
 
 // Conn is wrapper to net.Conn
 // implemented to encapsulate bytes statistic
-/*type Conn interface {
-	net.Conn
-}
 
-type conn struct {
-	net.Conn
-	stat metrics.Bytes
-}
-
-var _ Conn = (*conn)(nil)
-*/
 type Sess interface {
 	quic.Stream
 }
@@ -30,17 +20,9 @@ type sess struct {
 // Handler ...
 type Handler interface {
 	OnConnection(Sess, *auth.Manager) error
-//	OnConnection(Conn, *auth.Manager) error
 }
 
-/*func newConn(cn net.Conn, stat metrics.Bytes) *conn {
-	c := &conn{
-		Conn: cn,
-		stat: stat,
-	}
 
-	return c
-}*/
 func newSess(cn quic.Stream, stat metrics.Bytes) *sess {
 	c := &sess{
 		Sess: cn,
@@ -51,8 +33,7 @@ func newSess(cn quic.Stream, stat metrics.Bytes) *sess {
 
 // Read ...
 
-//func (c *conn) Read(b []byte) (int, error) {
-//	n, err := c.Conn.Read(b)
+
 func (c *sess) Read(b []byte) (int, error){
 	n, err := c.Sess.Read(b)
 	c.stat.OnRecv(n)
@@ -60,9 +41,7 @@ func (c *sess) Read(b []byte) (int, error){
 	return n, err
 }
 
-// Write ...
-//func (c *conn) Write(b []byte) (int, error) {
-//	n, err := c.Conn.Write(b)
+
 func (c *sess) Write(b []byte) (int, error){
 	n, err := c.Sess.Write(b)
 	c.stat.OnSent(n)
