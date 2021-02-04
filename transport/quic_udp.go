@@ -20,11 +20,8 @@ type ConfigQUIC struct {
 type quic_udp struct {
 	baseConfig 
 	tls		*tls.Config
-<<<<<<< HEAD
 	listener	quic.Listener 
-=======
 	listener	quic.EarlyListener //Listener para UDP
->>>>>>> c1110d28548d3cbacecc4eb6b92ecda53924dc35
 }
 // NewConfigQUIC crea nueva configuración para QUIC
 func NewConfigQuic(transport *Config) *ConfigQUIC {
