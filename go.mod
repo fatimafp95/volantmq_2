@@ -1,7 +1,7 @@
 module github.com/VolantMQ/volantmq
 
 go 1.13
-replace github.com/lucas-clemente/quic-go v0.15.1 => /home/administrator/go/src/github.com/lucas-clemente2/quic-go
+replace github.com/lucas-clemente/quic-go v0.15.1 => /home/administrator/go/src/github.com/fatimafp95/quic-go
 
 require (
 	github.com/VolantMQ/vlapi v0.5.4
