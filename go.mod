@@ -1,7 +1,7 @@
 module github.com/VolantMQ/volantmq
 
 go 1.13
-//replace github.com/lucas-clemente/quic-go v0.15.1 => /home/administrator/go/src/github.com/fatimafp95/quic-go
+replace github.com/lucas-clemente/quic-go v0.15.1 => /home/administrator/go/src/github.com/fatimafp95/quic-go
 
 require (
 	github.com/VolantMQ/vlapi v0.5.4
@@ -11,8 +11,8 @@ require (
 	github.com/gobwas/pool v0.2.0 // indirect
 	github.com/gobwas/ws v1.0.2
 	github.com/gorilla/websocket v1.4.1 // indirect
-//	github.com/lucas-clemente/quic-go v0.15.1
-	github.com/fatimafp95/quic-go v0.0.0
+	github.com/lucas-clemente/quic-go v0.15.1
+//	github.com/fatimafp95/quic-go v0.0.0
 	github.com/pkg/errors v0.8.1
 	github.com/stretchr/testify v1.4.0
 	github.com/troian/healthcheck v0.1.3
