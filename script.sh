@@ -17,11 +17,13 @@ cd $GOPATH/src/github.com/fatimafp95/quic-go
 export GO111MODULE=on
 go mod tidy
 export GO111MODULE=off
-go get github.com/fatimafp95/quic-go
+go get github.com/fatimafp95/volantmq_2
 cd $GOPATH/src/github.com/fatimafp95/volantmq_2
+sed -i 's@administrator@ffp27@g' go.mod
 export GO111MODULE=on
 go mod tidy
 sudo cp $GOPATH/src/github.com/fatimafp95/volantmq_2/tools/print_version.sh /bin
+sudo chmod +x /bin/print_version.sh
 export GO111MODULE=off
 go get github.com/troian/govvv
 cd cmd/volantmq/
