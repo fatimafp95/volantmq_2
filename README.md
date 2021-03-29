@@ -217,10 +217,11 @@ Internal to system users can omit entire auth and TLS
 - [ ] [Helm](https://github.com/VolantMQ/volantmq/issues/147)
 
 ###How to use
-```bash
-docker run --rm -p 1883:1883 -p 8080:8080 -v $(pwd)/examples/config.yaml:/etc/volantmq/config.yaml \
---env VOLANTMQ_CONFIG=/etc/volantmq/config.yaml volantmq/volantmq
-```
+
+script.sh file installs all the plugins [section][#Plugins]. It has to be changed GOPATH (line 7) and the local path where is github.com/fatimafp95/quic-go (line 22). 
+Then, to run the broker:
+cd $GOPATH/src/github.com/fatimafp95/volantmq_2/cmd/volantmq
+sudo ./volantmq --config=../../examples/config.yaml
 
 ### [Contributing guidelines](https://github.com/volantmq/volantmq/blob/master/CONTRIBUTING.md)
 
