@@ -83,9 +83,4 @@ GO111MODULE=on
 go mod tidy
 sudo /usr/local/go/bin/go build $VOLANTMQ_BUILD_FLAGS -buildmode=plugin -ldflags "-X main.version=$(print_version.sh)" -o $VOLANTMQ_WORK_DIR/plugins/auth_http.so
 
-#Running the broker with config.yaml file
-cd $GOPATH/src/github.com/fatimafp95/volantmq_2
 sudo cp -r /usr/lib/volantmq /var/lib
-#sudo /usr/lib/volantmq/bin/volantmq --config=examples/config.yaml
-cd cmd/volantmq
-sudo ./volantmq --config=../../examples/config.yaml
