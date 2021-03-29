@@ -216,10 +216,12 @@ Internal to system users can omit entire auth and TLS
 - [x] [Docker](https://hub.docker.com/repository/docker/volantmq/volantmq) image contains prebuilt plugins listed in this [section][#Plugins] 
 - [ ] [Helm](https://github.com/VolantMQ/volantmq/issues/147)
 
-###How to use
+### How to use
 
 script.sh file installs all the plugins [section][#Plugins]. It has to be changed GOPATH (line 7) and the local path where is github.com/fatimafp95/quic-go (line 22). 
+
 Then, to run the broker:
+
 cd $GOPATH/src/github.com/fatimafp95/volantmq_2/cmd/volantmq
 sudo ./volantmq --config=../../examples/config.yaml
 
